@@ -15,7 +15,7 @@ namespace Grpc.Service.Models
 
         public int Age { get; set; } = 18;
 
-        public Gender Gender { get; set; } = Gender.NotSelected;
+        public Gender Gender { get; set; } = Gender.Male;
 
         public UserDTO ConvertToDTO()
         {
