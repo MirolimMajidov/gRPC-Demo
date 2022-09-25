@@ -1,0 +1,27 @@
+﻿@model UserDTO
+
+<div class="shadow p-1 mb-3 bg-white rounded"><center><h3>@ViewData["Title"]</h3></center></div>
+
+<div class="col-md-5">
+    
+    <dl class="row col-md-5">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <input type="button" class="btn btn-dark" value="Back" onclick="history.back()">
+    </form>
+</div>

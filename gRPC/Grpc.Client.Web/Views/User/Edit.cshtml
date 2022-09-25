@@ -1,0 +1,41 @@
+﻿@model UserDTO
+
+<div class="shadow p-1 mb-3 bg-white rounded"><center><h3>@ViewData["Title"]</h3></center></div>
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col col-sm-6">
+                    <label asp-for="Gender" class="control-label"></label>
+                </div>
+                <div class="col">
+                    <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-dark" value="Back" onclick="history.back()">
+                <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

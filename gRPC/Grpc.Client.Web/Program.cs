@@ -1,7 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddMvc()
+       .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AllowAnonymousToPage("/Home/Index");
+            });
 
 var app = builder.Build();
 
@@ -17,5 +21,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+
 
 app.Run();
