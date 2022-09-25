@@ -1,27 +1,17 @@
-﻿using Grpc.Net.Client;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using static Grpc.Client.Web.UserService;
-
-namespace Grpc.Client.Web.Pages
+﻿namespace Grpc.Client.Web.Pages
 {
-    public class UsersModel : PageModel
+    public class UsersModel : BasePage
     {
-        private readonly ILogger<UsersModel> _logger;
-        private readonly List<UserDTO> _users;
+        public List<UserDTO> Users;
 
-        public UsersModel(ILogger<UsersModel> logger)
+        public UsersModel(ILogger<UsersModel> logger) : base(logger)
         {
-            _logger = logger;
-
-            var grpcChannel = GrpcChannel.ForAddress("http://localhost:9595/");
-            var client = new UserServiceClient(grpcChannel);
-            _users = GetUsersByStream(client).Result;
         }
 
-        async Task<List<UserDTO>> GetUsersByStream(UserServiceClient client)
+        async Task<List<UserDTO>> GetUsersByStream()
         {
             List<UserDTO> users = new();
-            using var clientData = client.GetUsersByStream(new Empty());
+            using var clientData = ServiceClient.GetUsersByStream(new Empty());
             while (await clientData.ResponseStream.MoveNext(new CancellationToken()))
             {
                 var user = clientData.ResponseStream.Current;
@@ -30,14 +20,15 @@ namespace Grpc.Client.Web.Pages
             return users;
         }
 
-        async Task<List<UserDTO>> GetUsers(UserServiceClient client)
+        async Task<List<UserDTO>> GetUsers()
         {
-            var result = await client.GetAllAsync(new Empty());
+            var result = await ServiceClient.GetAllAsync(new Empty());
             return result.Items.ToList();
         }
 
         public void OnGet()
         {
+            Users = GetUsersByStream().Result;
         }
     }
 }
