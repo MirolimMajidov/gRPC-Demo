@@ -21,9 +21,11 @@ namespace Grpc.Service.Models
         {
             return new UserDTO
             {
-                Id = Id.ToString()
-
-
+                Id = Id.ToString(),
+                FirstName = FirstName,
+                LastName = LastName,
+                Age = Age,
+                Gender = (int)Gender
             };
         }
     }

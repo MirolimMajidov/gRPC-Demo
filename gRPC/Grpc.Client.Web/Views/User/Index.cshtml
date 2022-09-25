@@ -18,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Age)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -40,9 +37,6 @@
                     </td>
                     <th>
                         @Html.DisplayFor(modelItem => item.Age)
-                    </th>
-                    <th>
-                        @Html.DisplayFor(modelItem => item.Gender)
                     </th>
                     <td>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Info</a>
