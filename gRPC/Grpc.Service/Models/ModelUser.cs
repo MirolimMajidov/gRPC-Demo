@@ -32,9 +32,6 @@ namespace Grpc.Service.Models
 
     public enum Gender
     {
-        [Display(Name = "Not selected")]
-        NotSelected,
-
         [Display(Name = "Female")]
         Female,
 

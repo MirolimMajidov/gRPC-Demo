@@ -1,4 +1,5 @@
 ﻿using Grpc.Client.Web;
+using Grpc.Client.Web.Models;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Mvc;
 using static Grpc.Client.Web.UserService;
@@ -44,9 +45,17 @@ namespace Titan.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
-            var user = await _serviceClient.GetByIdAsync(new UserId { Id  = id });
+            var user = await _serviceClient.GetByIdAsync(new UserId { Id = id });
+            var modelUser = new ModelUser
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Age = user.Age,
+                Gender = user.Gender == 1 ? Gender.Male : Gender.Female
+            };
             ViewData["Title"] = "User info";
-            return View(user);
+            return View(modelUser);
         }
 
         public IActionResult Create()

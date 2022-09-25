@@ -12,14 +12,11 @@ namespace Grpc.Client.Web.Models
 
         public int Age { get; set; } = 18;
 
-        public Gender Gender { get; set; } = Gender.NotSelected;
+        public Gender Gender { get; set; } = Gender.Male;
     }
 
     public enum Gender
     {
-        [Display(Name = "Not selected")]
-        NotSelected,
-
         [Display(Name = "Female")]
         Female,
 
