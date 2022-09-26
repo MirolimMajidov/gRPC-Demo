@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".activities.MainActivity">
+
+    <EditText
+        android:id="@+id/fNameEdt"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/firstname"
+        android:maxLength="50"
+        android:inputType="textCapWords|textCapSentences"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/lNameEdt"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/lastname"
+        android:maxLength="50"
+        android:inputType="textCapWords|textCapSentences"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/ageEdt"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:maxLength="3"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/age"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/genderSpin"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/gender"
+        android:entries="@array/genders"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:text="@string/save"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"/>
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">GRPC</string>
+    <string name="info">Info</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="firstname">FirstName</string>
+    <string name="lastname">LastName</string>
+    <string name="id">ID</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="fill">Fill all fields!</string>
+    <string name="saved">User saved!</string>
+    <string name="created">New User created!</string>
+    <string name="edit_user">Edit User</string>
+    <string name="create_user">Create User</string>
+
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>
