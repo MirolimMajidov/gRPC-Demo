@@ -14,7 +14,7 @@ namespace Titan.Controllers
         public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
-            var grpcChannel = GrpcChannel.ForAddress("https://localhost:5001/");
+            var grpcChannel = GrpcChannel.ForAddress("https://localhost:9595/");
             _serviceClient = new UserServiceClient(grpcChannel);
         }
 

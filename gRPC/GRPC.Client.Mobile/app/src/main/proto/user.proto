@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "Grpc.Client.Mobile";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package users;
+
+service UserService {
+  rpc GetAll(Empty) returns(Users);
+  rpc GetUsersByStream (Empty) returns (stream UserDTO);
+  rpc GetById (UserId) returns (UserDTO);
+  rpc Create(UserDTO) returns(UserId);
+  rpc Update(UserDTO) returns(Result);
+  rpc Delete(UserId) returns(Result);
+}
+
+message Empty {}
+
+message Result {
+  bool Successful = 1;
+}
+
+message UserId {
+  string Id = 1;
+}
+
+
+//More information about proto types: https://learn.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types
+message UserDTO {
+  string Id = 1;
+  string FirstName = 2;
+  string LastName = 3;
+  int32 Age = 4;
+  int32 Gender = 5;
+}
+
+message Users {
+    repeated UserDTO items = 1;
+}

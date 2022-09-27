@@ -7,9 +7,15 @@ import com.google.gson.Gson;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import Grpc.Client.Mobile.Empty;
+import Grpc.Client.Mobile.UserDTO;
+import Grpc.Client.Mobile.UserServiceGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import pg.grpc.App;
 
 public class UserController {
@@ -25,13 +31,15 @@ public class UserController {
     }
 
     public static ArrayList<User> getAll() {
-        if (users.size() == 0) {
+        ArrayList<User> users = new ArrayList<>();
+
+       /* TOOD if (users.size() == 0) {
             Random rnd = new Random(1);
             for (int i = 1; i <= 10; i++) {
                 users.add(new User(UUID.randomUUID().toString(), "User", "Userov " + i, rnd.nextInt(100), User.MALE));
             }
             save(users);
-        }
+        }*/
         return users;
     }
 
