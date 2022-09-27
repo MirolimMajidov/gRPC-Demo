@@ -30,16 +30,15 @@ public class UserController {
         }
     }
 
-    public static ArrayList<User> getAll() {
+    public static ArrayList<User> getTestUsers() {
         ArrayList<User> users = new ArrayList<>();
-
-       /* TOOD if (users.size() == 0) {
+       if (users.size() == 0) {
             Random rnd = new Random(1);
             for (int i = 1; i <= 10; i++) {
                 users.add(new User(UUID.randomUUID().toString(), "User", "Userov " + i, rnd.nextInt(100), User.MALE));
             }
             save(users);
-        }*/
+        }
         return users;
     }
 

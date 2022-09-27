@@ -60,7 +60,7 @@ namespace Titan.Controllers
 
         public IActionResult Create()
         {
-            var newUser = new UserDTO() { Age = 18 };
+            var newUser = new UserDTO() { Age = 18, Gender = (int)Gender.Male };
             ViewData["Title"] = "Create";
             return View(newUser);
         }

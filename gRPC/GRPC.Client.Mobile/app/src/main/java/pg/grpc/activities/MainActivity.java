@@ -39,9 +39,9 @@ import pg.grpc.data.UserController;
 
 public class MainActivity extends AppCompatActivity {
 
-    public RecyclerView rv;
-    public ArrayList<User> users = new ArrayList();
+    private RecyclerView rv;
     private ProgressBar progress;
+    private ArrayList<User> users = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadUsers() {
         Thread thread = new Thread(() -> {
-            String host = "https://192.168.100.3";
+            //TODO
+            String host = "https://localhost";
             int port = 9595;
-            ArrayList<User> users = new ArrayList<>();
+            users = new ArrayList<>();
             try  {
                 ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                 UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
@@ -71,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
             } catch(Exception e)
             {
                 users.add(new User("TestId", "", e.getMessage(), 0, 1));
+                users.addAll(UserController.getTestUsers());
             }
-            //TODO: users = UserController.getAll();
 
             runOnUiThread(()->{
                 rv.setAdapter(new UsersAdapter(MainActivity.this, users, new UsersAdapter.UserListener() {
@@ -120,71 +121,5 @@ public class MainActivity extends AppCompatActivity {
         if (rv != null) {
             loadUsers();
         }
-    }
-
-
-    private static class GrpcTask extends AsyncTask<Object, Void, ArrayList<User>> {
-        private final WeakReference<MainActivity> activityReference;
-        private ManagedChannel channel;
-
-        private GrpcTask(MainActivity activity) {
-            this.activityReference = new WeakReference<MainActivity>(activity);
-        }
-
-        @Override
-        protected ArrayList<User> doInBackground(Object[] objects) {
-            String host = "https://109.75.61.39/";
-            int port = 9595;
-            try {
-                ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-                UserServiceGrpc.UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
-                Empty request = Empty.newBuilder().build();
-                List<UserDTO> serverUsers = stub.getAll(request).getItemsList();
-                ArrayList<User> users = new ArrayList<>();
-                if (serverUsers.size() >0) {
-                    for (int i = 0; i < serverUsers.size(); i++) {
-                        UserDTO user = serverUsers.get(i);
-                        users.add(new User(user.getId(), user.getFirstName(), user.getLastName(), user.getAge(), user.getGender()));
-                    }
-                }
-
-                return users;
-            } catch (Exception e) {
-                return  new ArrayList<User>();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<User> users) {
-            try {
-                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            MainActivity activity = activityReference.get();
-            if (activity == null) {
-                return;
-            }
-            //TODO
-            activity.rv.setAdapter(new UsersAdapter(activity, users, new UsersAdapter.UserListener() {
-                @Override
-                public void info(String id) {
-                    InfoActivity.getInstance(activity, id);
-                }
-
-                @Override
-                public void edit(String id) {
-                    EditOrCreateActivity.getInstance(activity, EditOrCreateActivity.ACTION_EDIT, id);
-                }
-
-                @Override
-                public void delete(String id) {
-                    if (UserController.deleteUser(id)) {
-                        activity.loadUsers();
-                    }
-                }
-            }));
-        }
-
     }
 }
