@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Grpc.Service.Services
 {
-    public class UsersService : UserService.UserServiceBase
+    public class UserService : Protos.UserService.UserServiceBase
     {
-        private readonly ILogger<UsersService> _logger;
+        private readonly ILogger<UserService> _logger;
         private readonly UserContext _context;
 
-        public UsersService(ILogger<UsersService> logger, UserContext context)
+        public UserService(ILogger<UserService> logger, UserContext context)
         {
             _logger = logger;
             _context = context;
